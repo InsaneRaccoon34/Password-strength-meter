@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.strengthBar {
+  display: flex;
+  flex-grow: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  vertical-align: 2px;
+}
+
+.bar {
+  background: #ddd;
+  border-radius: 2px;
+  display: inline-block;
+  height: 5px;
+  margin-right: 1px;
+  flex-grow: 1;
+}
