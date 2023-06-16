@@ -36,9 +36,8 @@ export class StrengthMeterComponent implements OnChanges {
 
     this.passwordStrength = this.checkStrength(password)
 
-    this.setBarColors(this.passwordStrength, this.colors[this.passwordStrength - 1])
-    console.log(this.barColors)
-
+    if (password && password.length < 8) this.setBarColors(3, this.colors[0])
+    else this.setBarColors(this.passwordStrength, this.colors[this.passwordStrength - 1])
   }
 
   private setBarColors(count: number, color: string) {
