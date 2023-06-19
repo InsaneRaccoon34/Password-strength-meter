@@ -1,5 +1,4 @@
 import {Component, Input, OnChanges, SimpleChange} from '@angular/core';
-import {reduce} from "rxjs";
 
 @Component({
   selector: 'app-strength-meter',
@@ -7,16 +6,9 @@ import {reduce} from "rxjs";
   styleUrls: ['./strength-meter.component.css']
 })
 export class StrengthMeterComponent implements OnChanges {
-  private passwordStrengthList = {
-    0: {status: 'under 8', color: 'red'},
-    1: {status: 'easy', color: 'red'},
-    2: {status: 'medium', color: 'yellow'},
-    3: {status: 'strong', color: 'green'},
-  }
   private colors = [
     'red', 'yellow', 'green'
   ]
-  passwordStrength = 0
   barColors = []
 
   @Input() public passwordToCheck!: string
@@ -33,11 +25,10 @@ export class StrengthMeterComponent implements OnChanges {
 
   ngOnChanges(changes: { [propName: string]: SimpleChange }) {
     const password = changes['passwordToCheck'].currentValue
-
-    this.passwordStrength = this.checkStrength(password)
+    const passwordStrength = this.checkStrength(password)
 
     if (password && password.length < 8) this.setBarColors(3, this.colors[0])
-    else this.setBarColors(this.passwordStrength, this.colors[this.passwordStrength - 1])
+    else this.setBarColors(passwordStrength, this.colors[passwordStrength - 1])
   }
 
   private setBarColors(count: number, color: string) {
@@ -46,6 +37,4 @@ export class StrengthMeterComponent implements OnChanges {
       (this as any).barColors[i] = color
     }
   }
-
-  protected readonly reduce = reduce;
 }
